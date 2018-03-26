@@ -40,6 +40,9 @@ function createUser(userName, password, phone, email, bornOn, callback) {
 function InsertUsers(callBack) {
 	async.parallel([
 		function(callback) {
+			createUser('Swathi', 'swa@2018', 7795728976, 'swathiep2009@gmail.com', new Date('1988-05-07'), callback);
+		},
+		function(callback) {
 			createUser('BalajiDN', 'Bala@123', 9844765624, 'balajiforyou@gmail.com', new Date('1987-03-03'), callback);
 		},
 		function(callback) {
@@ -100,25 +103,3 @@ async.series([InsertUsers], function(err, result) {
 });
 
 
-
-// fetch user and test password verification
-/*User.findOne({ "userName": 'Swathi' }, function(err, user) {
-    if (err) {
-    	console.log("error in find user:: "+err);
-    } 
-    console.log("user found:: "+user);
-
-    // test a matching password
-    if(user !== null) {
-	    user.comparePassword('Password123', function(err, isMatch) {
-	        if (err) throw err;
-	        console.log('Password123:', isMatch); // -&gt; Password123: true
-	    });
-
-	    // test a failing password
-	    user.comparePassword('123Password', function(err, isMatch) {
-	        if (err) throw err;
-	        console.log('123Password:', isMatch); // -&gt; 123Password: false
-	    });
-	}
-});*/
