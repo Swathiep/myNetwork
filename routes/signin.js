@@ -20,6 +20,7 @@ function findUser(userName, password, res) {
 	User.findOne({ "userName": userName }, function(err, user) {
 	    if (err) {
 	    	console.log("error in find user:: "+err);
+	    	res.json({});
 	    } 
 
 	    // test a matching password
@@ -30,10 +31,14 @@ function findUser(userName, password, res) {
 		        	console.log('User: '+userName+' Signed In successfully.'); 
 		        	res.json(user);
 		        } else {
-		        	console.log('Sign In Failed. Please re-try with valid credentials.');
-		        	res.json({});
+		        	res.status(404);
+		        	res.send('Sign In Failed. Please re-try with valid credentials.');
 		        }
 		    });
+		} else {
+			console.log("No such user found.");
+			res.status(404);
+			res.send("No such user found.");
 		}
 	});
 }
